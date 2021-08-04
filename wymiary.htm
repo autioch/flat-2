@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Wymiary</title>
+  <style type="text/css">
+    html {font-family:Verdana,Consolas}
+    section {float:left;margin:12px;background:#f8f8f8;padding:6px}
+    header {text-align:center;margin-bottom:5px}
+    table {border-collapse:collapse;}
+    tr:not(:last-child) td {border-bottom:dashed 1px #ddd;border-collapse:collapse;}
+    td:not(:first-child) {text-align:right}
+    td:last-child{padding-left: 10px}
+  </style>
+</head>
+<body>
+  <script>
+  const scale = 0.08;
+  const sections = [
+    {
+      label: 'Legenda 1',
+      items: [
+        { label: '', size: 125 },
+        { label: '', size: 100 },
+        { label: '', size: 80 },
+        { label: '', size: 75 },
+        { label: '', size: 60 },
+        { label: '', size: 50 },
+        { label: '', size: 40 },
+        { label: '', size: 25 },
+        { label: '', size: 30 },
+        { label: '', size: 20 },
+        { label: '', size: 15 },
+        { label: '', size: 12.5 },
+        { label: '', size: 10 },
+        { label: '', size: 9.375 },
+        { label: '', size: 6.25 },
+        { label: '', size: 5 },
+        { label: '', size: 3.125 },
+        { label: '', size: 1.25 }
+      ]
+    },
+    {
+      label: 'Ściany',
+      items: [
+        { label: '', size: 42 },
+        { label: '', size: 24 },
+        { label: '', size: 11 },
+        { label: '', size: 10 },
+        { label: '', size: 8 }
+      ]
+    },
+    {
+      label: 'Łazienki',
+      items: [
+        { label: '', size: 365 },
+        { label: '', size: 266 },
+        { label: '', size: 160 },
+        { label: '', size: 205 },
+        { label: '', size: 150 },
+        { label: '', size: 104 },
+        { label: '', size: 58 },
+        { label: '', size: 93 },
+        { label: '', size: 92 },
+        { label: '', size: 37 },
+        { label: '', size: 39 },
+        { label: '', size: 70 }
+      ]
+    },
+    {
+      label: 'Sypialnie',
+      items: [
+        { label: '', size: 260 },
+        { label: '', size: 298 },
+        { label: '', size: 378 },
+        { label: '', size: 278 },
+        { label: '', size: 90 },
+        { label: '', size: 110 },
+        { label: '', size: 225 },
+        { label: '', size: 60 },
+        { label: '', size: 268 },
+        { label: '', size: 162 },
+        { label: '', size: 288 },
+        { label: '', size: 187 },
+        { label: '', size: 92 },
+        { label: '', size: 9 },
+        { label: '', size: 270 },
+        { label: '', size: 78 },
+        { label: '', size: 84 },
+        { label: '', size: 260 + 8 + 288 },
+        { label: '', size: 100 + 8 + 270 + 24 },
+        { label: '', size: 100 }
+      ]
+    },
+	{
+      label: 'Salon',
+      items: [
+        { label: '', size: 169 },
+        { label: '', size: 217 },
+        { label: '', size: 109 },
+        { label: '', size: 54 },
+        { label: '', size: 73 },
+        { label: '', size: 225 },
+        { label: '', size: 457 },
+        { label: '', size: 110 },
+        { label: '', size: 398 },
+        { label: '', size: 75 },
+        { label: '', size: 13 },
+        { label: '', size: 52 },
+        { label: '', size: 144 },
+        { label: '', size: 254 },
+        { label: '', size: 260 },
+        { label: '', size: 194 },
+        { label: '', size: 122 },
+        { label: '', size: 21 },
+        { label: '', size: 207 },
+        { label: '', size: 525 },
+        { label: '', size: 213 },
+        { label: 'Od szachtu do góry', size: 634 },
+        { label: 'sypialnia + salon szerokość', size: 631},
+        { label: '', size: 107 }
+      ]
+    },
+	{
+      label: 'Meble',
+	  ordered: true,
+      items: [
+        { label: 'Blat kuchni', size: 65 },
+        { label: 'Blat kuchni', size: 523.75 },
+        { label: 'Blat kuchni', size: 462.5 },
+        { label: 'Stół dł', size: 150 },
+        { label: 'Stół dł', size: 120 },
+        { label: 'Stół szer', size: 80 },
+        { label: 'Kanapa dł', size: 200 },
+        { label: 'Kanapa dł', size: 170 },
+        { label: 'Kanapa szer', size: 80 },
+		
+	  ]
+	}
+  ];
+  const mel = (tn, value) => {
+      const el = document.createElement(tn);
+      if (typeof value === 'string'){
+        el.textContent = value;
+      } else if (value !== undefined){
+        el.append(value);
+      }
+      return el;
+  };
+  sections.forEach(section => {
+    const sel = mel('section', mel('header', section.label));
+    const tel = mel('table');
+    sel.append(tel);
+
+    !section.ordered && section.items.sort((a,b) => b.size - a.size);
+	
+	section.items.forEach(item => {
+      const iel = mel('tr');
+      const lel = mel('td', item.label);
+      const soel = mel('td', item.size.toFixed(1));
+      const ssel = mel('td', (item.size * scale).toFixed(1));
+      iel.append(lel, soel, ssel);
+      tel.append(iel);
+    })
+    sel.append(tel);
+    document.body.append(sel);
+  })
+  </script>
+</body>
+</html>
